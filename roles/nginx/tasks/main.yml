@@ -1,0 +1,20 @@
+---
+# tasks file for nginx
+- name: Install nginx
+  apt: name=nginx state=latest
+
+- name: Copy nginx configuration for roshi-server
+  copy: src=default  dest=/etc/nginx/sites-available/default
+  notify: restart nginx
+
+- name: Disable init.d script
+  command: update-rc.d nginx disable
+
+- name: Copy upstart file
+  copy: src=nginx-upstart.conf dest=/etc/init/nginx.conf owner=root group=root mode=0644
+
+- name: Load config
+  command: initctl reload-configuration
+
+- name: Enable service
+  service: name=nginx enabled=yes state=started
