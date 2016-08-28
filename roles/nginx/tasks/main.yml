@@ -1,5 +1,8 @@
 ---
 # tasks file for nginx
+- name: Copy upstart file
+  copy: src=nginx-upstart.conf dest=/etc/init/nginx.conf owner=root group=root mode=0644
+
 - name: Install nginx
   apt: name=nginx state=latest
 
@@ -7,14 +10,7 @@
   copy: src=default  dest=/etc/nginx/sites-available/default
   notify: restart nginx
 
-- name: Disable init.d script
-  command: update-rc.d nginx disable
-
-- name: Copy upstart file
-  copy: src=nginx-upstart.conf dest=/etc/init/nginx.conf owner=root group=root mode=0644
-
-- name: Load config
-  command: initctl reload-configuration
+- meta: flush_handlers
 
 - name: Enable service
   service: name=nginx enabled=yes state=started
