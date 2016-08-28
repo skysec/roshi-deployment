@@ -1,0 +1,11 @@
+---
+# Ubuntu user provisioning
+- hosts: all
+  become: yes
+  tasks:
+    - name: Add user ubuntu
+      user: name=ubuntu comment="Ubuntu User" shell=/bin/bash state=present
+    - name: Add SSH public key
+      authorized_key: user=ubuntu key="{{ lookup('file', 'files/key.pem.pub')  }}"
+    - name: Add sudoers
+      copy: src=files/ubuntu dest=/etc/sudoers.d/ubuntu owner=root group=root mode=0640

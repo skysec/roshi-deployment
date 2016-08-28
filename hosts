@@ -1,0 +1,9 @@
+[local]
+localhost ansible_connection=local
+
+[roshi]
+roshi ansible_host=192.168.100.80
+
+[build]
+build ansible_host=192.168.100.90
+

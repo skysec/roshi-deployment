@@ -1,0 +1,2 @@
+# Ubuntu user
+ubuntu ALL=(ALL) NOPASSWD:ALL
