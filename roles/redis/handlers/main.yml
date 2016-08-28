@@ -1,0 +1,7 @@
+---
+# handlers file for redis
+- name: stop redis-server
+  service: name=redis-server state=stopped
+
+- name: restart redis
+  service: name=redis state=restarted enabled=yes

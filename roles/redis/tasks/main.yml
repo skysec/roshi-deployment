@@ -1,0 +1,20 @@
+---
+# tasks file for redis
+- name: Add repository
+  apt_repository: repo="ppa:chris-lea/redis-server"
+
+- name: Install redis
+  apt: name=redis-server state=present update_cache=yes
+  notify: stop redis-server
+
+- meta: flush_handlers
+
+- name: Copy upstart file
+  copy: src=redis-upstart.conf dest=/etc/init/redis-server.conf owner=root group=root mode=0644
+
+- name: Add redis config
+  copy: src=redis.conf dest=/etc/redis/redis.conf owner=root group=root mode=0644
+
+- name: Enable service
+  service: name=redis-server  enabled=yes state=started
+
