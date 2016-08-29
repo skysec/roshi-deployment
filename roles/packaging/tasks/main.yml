@@ -1,4 +1,5 @@
 ---
-# tasks file for fpm
-- name: Install git
-  apt: name=git update_cache=yes state=present
+# tasks file for building and packing roshi
+- name: Install needed packages
+  apt: name={{ item }} update_cache=yes state=present
+  with_items: "{{ packages }}"

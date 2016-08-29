@@ -1,0 +1,7 @@
+---
+# defaults file for roshi-server
+repo_url: "http://skysec-dev-repo.s3-website-us-east-1.amazonaws.com/repo"
+roshi_name: "roshi-server"
+roshi_version: "0.0.2-1"
+roshi_debian: "{{ roshi_name }}_{{ roshi_version }}.deb"
+roshi_download: "{{ repo_url }}/{{ roshi_debian }}"

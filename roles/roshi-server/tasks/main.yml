@@ -1,0 +1,16 @@
+---
+# tasks file for roshi-server
+- name: Download roshi-server deb package
+  get_url: url={{ roshi_download }} dest=/usr/local/src/{{ roshi_debian }}
+
+- name: Install roshi-server
+  apt: deb=/usr/local/src/{{ roshi_debian }}
+
+- name: Create roshi user
+  user: name=roshi comment="Roshi user" 
+
+- name: Copy upstart file
+  copy: src=roshi-upstart.conf dest=/etc/init/roshi.conf owner=root group=root mode=0644
+
+- name: Enable service
+  service: name=roshi enabled=yes state=started
