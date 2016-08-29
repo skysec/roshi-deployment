@@ -1,0 +1,11 @@
+---
+# Deploy Roshi Server
+- name: Deploy roshi
+  hosts: roshi
+  remote_user: ubuntu
+  become: yes
+  roles:
+   - redis
+   - nginx
+   - roshi-server
+   - ufw

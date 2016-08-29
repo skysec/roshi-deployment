@@ -1,9 +1,10 @@
 ---
 # Install, Build and deploy Roshi-server
-- name: Install and build Roshi
+- name: build and package Roshi
   hosts: build
   remote_user: ubuntu
   become: yes
   roles:
    - golang
    - packaging
+

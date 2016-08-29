@@ -21,18 +21,21 @@ Vagrant.configure(2) do |config|
         vb.memory = "2048"
       end
       server.vm.provision "ansible_local" do |ansible|
-          ansible.playbook = "playbook.yml"
+          ansible.playbook = "vagrant.yml"
       end
       case name
       when "roshi"
-        server.vm.network "private_network", ip: "192.168.100.80",
-  		netmask: "24"
+        server.vm.network "private_network", ip: "172.31.32.80",
+  			netmask: "24",
+        		virtualbox__intnet: "priv_172"
       when "ans"
-        server.vm.network "private_network", ip: "192.168.100.10",
-		netmask: "24"
+        server.vm.network "private_network", ip: "172.31.32.10",
+		netmask: "24",
+        	virtualbox__intnet: "priv_172"
       when "build"
-        server.vm.network "private_network", ip: "192.168.100.90",
-		netmask: "24"
+        server.vm.network "private_network", ip: "172.31.32.90",
+		netmask: "24",
+        	virtualbox__intnet: "priv_172"
       end
     end
   end
