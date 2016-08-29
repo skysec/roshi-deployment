@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Build roshi and create debian package
+source /etc/profile
 if [ -z $GOPATH ]; then
   echo "GOPATH not found"
   exit 2
@@ -32,8 +33,7 @@ Description: Roshi Server
 EOF
 
 cd ${ROSHI_PKG}/ 
-dpkg-deb --build roshi-server_${ROSHI_VERSION}
-if [ $# -ne 0 ]; then
-   echo "Couldn\'t create deb package"
-   exit 2
+dpkg-deb --build roshi-server_${ROSHI_VERSION} > /dev/null 2>&1
+if [ $# -eq 0 ]; then
+   echo "${ROSHI_PKG}/roshi-server_${ROSHI_VERSION}.deb"
 fi

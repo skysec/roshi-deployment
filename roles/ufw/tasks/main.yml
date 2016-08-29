@@ -1,0 +1,16 @@
+---
+# tasks file for ufw
+- name: Ensure ufw is installed
+  apt: name=ufw
+
+- name: Enable SSH from any source
+  ufw: to_port=22 proto="tcp" rule="allow"
+
+- name: Enable Port 80 form internal Network
+  ufw: to_port=80 proto="tcp" rule="allow" from_ip="172.31.32.0/24"
+
+- name: Change default policy for incoming packets
+  ufw: state=enabled direction=incoming policy=deny
+
+- name: Change default policy for outgoing packets
+  ufw: direction=outgoing policy=allow

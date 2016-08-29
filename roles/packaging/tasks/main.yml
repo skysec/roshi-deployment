@@ -3,3 +3,13 @@
 - name: Install needed packages
   apt: name={{ item }} update_cache=yes state=present
   with_items: "{{ packages }}"
+
+- name: Copy build script
+  copy: src=build-roshi.sh dest=/usr/local/bin/build-roshi.sh owner=root group=root mode=0755
+
+- name: Create build
+  shell: /usr/local/bin/build-roshi.sh
+  register: roshi_deb_path
+
+- name: Download package
+  fetch: src={{ roshi_deb_path.stdout }} dest={{ local_directory }} flat=yes
