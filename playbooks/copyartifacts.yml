@@ -1,0 +1,4 @@
+---
+# Copy artifacts to s3 bucket
+- name: copy roshi-server package to s3
+  s3: bucket={{ bucket_repo }} object="{{ repo_directory  }}/{{ roshi_package }}"  src="{{ local_directory }}/{{ roshi_package }}" mode=put

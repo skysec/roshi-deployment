@@ -1,0 +1,8 @@
+---
+# defaults file for fpm
+packages: ["git"]
+local_directory: "/tmp/"
+roshi_package: "roshi-server_0.0.2-1.deb"
+roshi_pkg: "/usr/local"
+bucket_repo: "skysec-dev-repo"
+repo_directory: "repo"

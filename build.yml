@@ -1,10 +1,24 @@
 ---
 # Install, Build and deploy Roshi-server
-- name: build and package Roshi
+- name: install and configure golang
   hosts: build
   remote_user: ubuntu
   become: yes
   roles:
    - golang
-   - packaging
 
+- name: build roshi server
+  hosts: build
+  remote_user: ubuntu
+  become: yes
+  vars_files:
+    - playbooks/vars/main.yml
+  tasks:
+    - include: playbooks/buildtasks.yml
+
+- name: copy artifact to s3 bucket
+  hosts: local
+  vars_files:
+    - playbooks/vars/main.yml
+  tasks:
+    - include: playbooks/copyartifacts.yml
