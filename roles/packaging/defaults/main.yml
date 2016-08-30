@@ -1,4 +1,0 @@
----
-# defaults file for fpm
-packages: ["git"]
-local_directory: "/tmp/"
